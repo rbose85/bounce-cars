@@ -1,0 +1,14 @@
+Exercise
+--------
+
+There is no right/wrong answer to this problem, and your level of experience will be taken into account when assessing your solutions.
+
+The Exercise:
+-------------
+Provide a simple REST web API written in Python to retrieve data from the provided data set. 
+
+The users of this API need to be able to specify a range of timestamps and optionally name which columns they are interested in. The API should return the relevant data in a JSON format.
+
+Please spend 1 hour in this exercise. Use of third-party libraries and tools is fine. If you do use third-party libraries provide a more polished solution (e.g. a more flexible API).
+
+Please send your solution back to us in a zip file after working on it for 1 hour - it doesn’t need to be complete.
