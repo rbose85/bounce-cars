@@ -1,0 +1,48 @@
+#!/usr/bin/env zsh
+# This hook is run after this virtualenv is activated.
+
+# symlink this file to venv postactivate
+#
+#   $ cdvirtualenv && cd bin
+#   $ rm postactivate
+#   $ ln -s path/to/proj/backend/_config/postactivate postactivate
+#
+
+echo_msg () {
+    echo "\n\t WARNING: $1 \n"
+    echo -n "Press [Enter] key to continue ..." && read
+}
+
+proj_path () {
+    local var
+
+    var="$VIRTUALENVWRAPPER_PROJECT_FILENAME"
+    if [ -z "$VIRTUALENVWRAPPER_PROJECT_FILENAME" ] ; then
+        echo_msg "Unable to locate env variable, $var"
+        return 1
+    fi
+
+    var="$VIRTUAL_ENV"
+    if [ -z "$VIRTUAL_ENV" ] ; then
+        echo_msg "Unable to locate env variable, $var"
+        return 1
+    fi
+
+    var="$VIRTUAL_ENV/$VIRTUALENVWRAPPER_PROJECT_FILENAME"
+    proj=$(/bin/cat $var)
+    echo $proj
+}
+
+run_script () {
+    [ -r $1 ] && . $1 || { echo_msg "Unable to locate file, $1" }
+}
+
+export PYTHONPATH="$(proj_path)/backend"
+export DJANGO_SETTINGS_MODULE="bounce.settings.local"
+
+run_script "$(proj_path)/backend/_config/venvwrapper/secret-key"
+run_script "$(proj_path)/backend/_config/venvwrapper/database"
+
+unset -f echo_msg
+unset -f proj_path
+unset -f run_script

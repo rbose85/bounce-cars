@@ -1,0 +1,4 @@
+-r base.txt
+
+# debugging
+ipython==2.2.0
