@@ -1,1 +1,1 @@
--r _config/requirements/local.txt
+-r _config/requirements/heroku.txt
