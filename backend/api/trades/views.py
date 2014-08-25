@@ -26,7 +26,7 @@ class TradeViewSet(viewsets.ReadOnlyModelViewSet):
 
     def __reduce_serializer_field_set(self, field_names):
         """iterate over list of field names and return preferred super-set"""
-        default_fields = list(self.get_serializer_class().get_fields().keys())
+        default_fields = list(self.get_serializer_class()().get_fields().keys())
         for fn in field_names:
             if fn not in default_fields:
                 return None

@@ -14,8 +14,12 @@ class TradeSerializer(serializers.HyperlinkedModelSerializer):
 
     def __init__(self, *args, **kwargs):
         """custom initialisation of serializer to support dynamic field list"""
-        # Don't pass the 'fields' arg up to the superclass
-        fields = kwargs["context"].pop("fields", None)
+
+        fields = None
+        context = kwargs.get("context")
+        if context:
+            # Don not pass 'fields' to superclass
+            fields = context.pop("fields", None)
 
         # Instantiate the superclass normally
         super(TradeSerializer, self).__init__(*args, **kwargs)
